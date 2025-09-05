@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:noted/pages/login.dart';
 
 
 void main() {
@@ -14,21 +16,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-// <<<<<<< nm-UI-Login
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      ),
+      home: const Login()
+    );
+  }
+}
 
-//         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-//       ),
-//       home: const Login()
-//     );
-//   }
-// }
-// =======
-//         // This is the theme of your application.
-//         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-//       ),
-//       initialRoute: AppRoutes.loginPage,
-//       getPages: AppPages.pages,
-//     );
-//   }
-// }
-// >>>>>>> nm-start-feature
