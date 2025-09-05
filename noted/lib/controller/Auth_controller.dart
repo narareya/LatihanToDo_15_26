@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:noted/routes/routes.dart';
 
 class AuthController extends GetxController {
   final username = TextEditingController();
@@ -11,6 +12,7 @@ class AuthController extends GetxController {
 
     if (user == 'admin' && pass == '123') {
       Get.snackbar('Success', 'Login Successful');
+      Get.offNamed(AppRoutes.dashboard);
     } else {
       Get.snackbar('Error', 'Invalid username or password');
     }

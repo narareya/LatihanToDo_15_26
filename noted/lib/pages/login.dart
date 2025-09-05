@@ -4,8 +4,8 @@ import 'package:noted/components/custom_button.dart';
 import 'package:noted/components/custom_textfield.dart';
 import 'package:noted/controller/Auth_controller.dart';
 
-class loginPage extends StatelessWidget {
-  loginPage({super.key});
+class LoginPage extends StatelessWidget {
+  LoginPage({super.key});
   final authController = Get.find<AuthController>();
 
   @override
