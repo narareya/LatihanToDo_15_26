@@ -1,37 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:noted/components/custom_button.dart';
+import 'package:noted/components/custom_textfield.dart';
+import 'package:noted/controller/Auth_controller.dart';
+import 'package:get/get.dart';
 
+class LoginPage extends StatelessWidget {
+  LoginPage({super.key});
+  final authController = Get.find<AuthController>();
 
-
-class Login extends StatefulWidget {
-  const Login({super.key});
-
-  @override
-State<Login> createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login Page'),
-      ),
-      body: Center(
+      body: Container(
+        margin: const EdgeInsets.all(15),
+        alignment: Alignment.center,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'Welcome to the Login Page',
-              style: TextStyle(fontSize: 24),
+            Image.asset(
+              'assets/images/cat.jpg',
+              width: 240,
+              height: 240,
+              fit: BoxFit.cover,
+            ),
+            const SizedBox(height: 70),
+            CustomTextField(
+              controller: TextEditingController(),
+              label: "👤 Email",
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Navigate back to the previous screen
-                Navigator.pop(context);
-              },
-              child: const Text('Go Back'),
+            CustomTextField(
+              controller: TextEditingController(),
+              label: "🗝️ Password",
+              obscure: true,
             ),
+            const SizedBox(height: 20),
+            // Simple Button
+            CustomButton(
+              myText: "Login",
+              onPressed: () {
+                authController.login();
+              },
+            )
           ],
         ),
       ),
