@@ -4,9 +4,10 @@ import 'package:noted/components/custom_textfield.dart';
 import 'package:noted/controller/Auth_controller.dart';
 import 'package:get/get.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
-  final authController = Get.find<AuthController>();
+
+class Login extends StatefulWidget {
+  const Login({super.key});
+
 
   @override
   Widget build(BuildContext context) {
