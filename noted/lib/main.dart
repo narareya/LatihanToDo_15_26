@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:noted/routes/pages.dart';
 import 'package:noted/routes/routes.dart';
-import 'package:get/get.dart';
+
 
 void main() {
   runApp(const MyApp());

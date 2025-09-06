@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
+
 class AuthController extends GetxController {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -11,6 +12,7 @@ class AuthController extends GetxController {
 
     if (email == 'admin' && password == '123') {
       Get.snackbar('Success', 'Login Successful');
+
     } else {
       Get.snackbar('Error', 'Invalid email or password');
     }
