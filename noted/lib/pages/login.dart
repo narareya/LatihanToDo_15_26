@@ -26,12 +26,12 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 70),
             CustomTextField(
-              controller: TextEditingController(),
+              controller: authController.emailController,
               label: "👤 Email",
             ),
             const SizedBox(height: 20),
             CustomTextField(
-              controller: TextEditingController(),
+              controller: authController.passwordController,
               label: "🗝️ Password",
               obscure: true,
             ),
