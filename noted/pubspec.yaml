@@ -28,4 +28,8 @@ flutter:
     - family: CatPaws
       fonts:
         - asset: assets/fonts/Cat paw.ttf
-          weight: 700
+          weight: 600
+    - family: Cattlya
+      fonts:
+        - asset: assets/fonts/Cattlya.ttf
+          weight: 600

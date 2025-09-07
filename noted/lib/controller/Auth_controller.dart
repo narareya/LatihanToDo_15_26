@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-
 class AuthController extends GetxController {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -9,12 +8,33 @@ class AuthController extends GetxController {
   void login() {
     final email = emailController.text;
     final password = passwordController.text;
-
-    if (email == 'admin' && password == '123') {
-      Get.snackbar('Success', 'Login Successful');
-
+    
+    print("Email: $email");
+    print("Password: $password");
+    
+    // Simple validation
+    if (email.isEmpty || password.isEmpty) {
+      Get.snackbar(
+        "Error", 
+        "Please fill all fields",
+        snackPosition: SnackPosition.TOP,
+      );
+      return;
+    }
+    
+    // Simple auth check (for demo)
+    if (email == "Narareya" && password == "nmdnta") {
+      Get.snackbar(
+        "Success", 
+        "Login successful!",
+        snackPosition: SnackPosition.TOP,
+      );
     } else {
-      Get.snackbar('Error', 'Invalid email or password');
+      Get.snackbar(
+        "Error", 
+        "Invalid credentials",
+        snackPosition: SnackPosition.TOP,
+      );
     }
   }
 }
