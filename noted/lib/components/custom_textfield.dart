@@ -6,6 +6,10 @@ class CustomTextField extends StatelessWidget {
   final String label;
   final bool obscure;
   final List<TextInputFormatter>? inputFormatters;
+  final String? fontFamily;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final BorderRadius? borderRadius;
 
   const CustomTextField({
     super.key,
@@ -13,6 +17,10 @@ class CustomTextField extends StatelessWidget {
     required this.label,
     this.obscure = false,
     this.inputFormatters,
+    this.fontFamily,
+    this.backgroundColor,
+    this.textColor,
+    this.borderRadius,
   });
 
   @override
@@ -22,8 +30,16 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscure,
       inputFormatters: inputFormatters,
       decoration: InputDecoration(
-      labelText: label,
-      border: OutlineInputBorder(),
+        labelText: label,
+        border: OutlineInputBorder(
+          borderRadius: borderRadius ?? BorderRadius.circular(20),
+        ),
+        filled: true,
+        fillColor: backgroundColor ?? Colors.white,
+        labelStyle: TextStyle(
+          color: textColor ?? Colors.grey[700],
+          fontFamily: fontFamily,
+        ),
       ),
     );
   }
