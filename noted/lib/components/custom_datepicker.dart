@@ -52,7 +52,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
+          border: Border.all(color: const Color.fromARGB(255, 0, 0, 0)),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -63,11 +63,11 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                   ? _formatDate(selectedDate!)
                   : widget.label ?? 'Pilih Tanggal',
               style: TextStyle(
-                color: selectedDate != null ? Colors.black : Colors.grey[600],
+                color: selectedDate != null ? Colors.black : const Color.fromARGB(255, 0, 0, 0),
                 fontSize: 16,
               ),
             ),
-            const Icon(Icons.calendar_today, color: Colors.grey),
+            const Icon(Icons.calendar_today, color: Color.fromARGB(255, 0, 0, 0)),
           ],
         ),
       ),
