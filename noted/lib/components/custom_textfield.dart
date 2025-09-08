@@ -37,7 +37,7 @@ class CustomTextField extends StatelessWidget {
         filled: true,
         fillColor: backgroundColor ?? Colors.white,
         labelStyle: TextStyle(
-          color: textColor ?? Colors.grey[700],
+          color: textColor ?? const Color.fromARGB(255, 0, 0, 0),
           fontFamily: fontFamily,
         ),
       ),
