@@ -17,44 +17,55 @@ class LoginPage extends StatelessWidget {
         backgroundColor: const Color(0xFFDFCAB5),
       ),
       body: Container(
-        margin: const EdgeInsets.all(15),
+        margin: const EdgeInsets.all(70),
         alignment: Alignment.center,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const CustomText(
-          text: "Noted!",
-          fontSize: 50,
-          fontWeight: FontWeight.bold,
-          color: Color(0xFF5D5D5D),
-          textAlign: TextAlign.center,
-          fontFamily: 'CatPaws',
-        ),
-            Image.asset(
-              'assets/images/cat.jpg',
-              width: 240,
-              height: 240,
-              fit: BoxFit.cover,
+              text: "Noted!",
+              fontSize: 50,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF5D5D5D),
+              textAlign: TextAlign.center,
+              fontFamily: 'CatPaws',
             ),
-            const SizedBox(height: 70),
-            CustomTextField(
-              controller: authController.emailController,
-              label: "👤 Email",
+            
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 35),
+              child: Image.asset(
+                'assets/images/cat.jpg',
+                width: 240,
+                height: 240,
+                fit: BoxFit.cover,
+              ),
             ),
-            const SizedBox(height: 20),
-            CustomTextField(
-              controller: authController.passwordController,
-              label: "🗝️ Password",
-              obscure: true,
+            
+            Container(
+              margin: const EdgeInsets.only(bottom: 20),
+              child: CustomTextField(
+                controller: authController.emailController,
+                label: "👤 Email",
+              ),
             ),
-            const SizedBox(height: 20),
+            
+            Container(
+              margin: const EdgeInsets.only(bottom: 20),
+              child: CustomTextField(
+                controller: authController.passwordController,
+                label: "🗝️ Password",
+                obscure: true,
+              ),
+            ),
+            
             CustomButton(
               myText: "Login",
               onPressed: () {
                 authController.login();
               },
-            )
+              borderRadius: BorderRadius.circular(15),
+            ),
           ],
         ),
       ),

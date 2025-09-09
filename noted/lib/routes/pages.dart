@@ -7,7 +7,6 @@ import 'package:noted/pages/history.dart';
 import 'package:noted/pages/homepage.dart';
 import 'package:noted/pages/newTask.dart';
 import 'package:noted/pages/profile.dart';
-
 import 'package:noted/routes/routes.dart';
 
 class AppPages {
