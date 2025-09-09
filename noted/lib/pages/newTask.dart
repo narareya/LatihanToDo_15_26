@@ -4,6 +4,7 @@ import 'package:noted/components/custom_dropdown.dart';
 import 'package:noted/components/custom_text.dart';
 import 'package:noted/components/custom_textfield.dart';
 import 'package:noted/components/custom_button.dart';
+import 'package:noted/components/customradiobutton.dart';
 
 class AddTaskPage extends StatelessWidget {
   const AddTaskPage({super.key});
@@ -33,8 +34,6 @@ class AddTaskPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 20),
-                
                 const CustomText(
                   text: '📝 Add New Task!',
                   color: Color(0xFF5D5D5D),
@@ -43,68 +42,101 @@ class AddTaskPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 
-                const SizedBox(height: 35),
-                
-                CustomTextField(
-                  controller: TextEditingController(),
-                  label: '✏️ Task Name',
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 15),
+                  child: CustomTextField(
+                    controller: TextEditingController(),
+                    label: '✏️ Task Name',
+                    backgroundColor: Colors.white,
+                  ),
                 ),
                 
-                const SizedBox(height: 20),
-                
-                CustomDatePicker(
-                  onDateSelected: (date) {
-                    print("Date selected: $date");
-                  },
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  child: CustomDatePicker(
+                    onDateSelected: (date) {
+                      print("Date selected: $date");
+                      backgroundColor: const Color(0xFFFFFFFF);
+                    },
+                  ),
                 ),
                 
-                const SizedBox(height: 20),
-                
-                CustomDropdown(
-                  items: const ['🔴 High', '🟡 Medium', '🟢 Low'],
-                  onChanged: (value) {
-                    print("Priority selected: $value");
-                  },
-                  
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  child: CustomDropdown(
+                    items: const ['Daily', 'Personal', 'Work', 'Other'],
+                    onChanged: (value) {
+                      print("Priority selected: $value");
+                    },
+                  ),
                 ),
                 
-                const SizedBox(height: 40),
-                
-                // Buttons Row
-                Row(
-                  children: [
-                                        Expanded(
-                      child: CustomButton(
-                        myText: "ADD",
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text("✅ Task added!"),
-                              backgroundColor: Color(0xFFA4B67C),
-                            ),
-                          );
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CustomRadioButton(
+                        label: 'High',
+                        isSelected: false,
+                        onTap: () {
+                          print("High priority selected");
                         },
-                        backgroundColor: Color(0xFFA4B67C),
                       ),
-                    ),
-                    const SizedBox(width: 15),
-                    Expanded(
-                      child: CustomButton(
-                        myText: "CANCEL",
-                        onPressed: () {
-                          Navigator.pop(context);
+                      CustomRadioButton(
+                        label: 'Medium',
+                        isSelected: false,
+                        onTap: () {
+                          print("Medium priority selected");
                         },
-                        backgroundColor: const Color(0xFFFE8A4A4),
                       ),
-                    ),
-                    
-                    const SizedBox(width: 15),
-                    
-
-                  ],
+                      CustomRadioButton(
+                        label: 'Low',
+                        isSelected: false,
+                        onTap: () {
+                          print("Low priority selected");
+                        },
+                      ),
+                    ],
+                  ),
                 ),
                 
-                const SizedBox(height: 20),
+                Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(right: 8),
+                          child: CustomButton(
+                            myText: "ADD",
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("✅ Task added!"),
+                                  backgroundColor: Color(0xFFA4B67C),
+                                ),
+                              );
+                            },
+                            backgroundColor: const Color(0xFFA4B67C),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 8),
+                          child: CustomButton(
+                            myText: "CANCEL",
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            backgroundColor: const Color(0xFFFE8A4A),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
