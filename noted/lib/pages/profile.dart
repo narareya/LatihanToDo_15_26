@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:noted/components/custom_color.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -68,7 +69,7 @@ class ProfilePage extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFF5D5D5D),
+                                  color: Colors.black
                                 ),
                               ),
                               
@@ -78,7 +79,7 @@ class ProfilePage extends StatelessWidget {
                                   '📧 john.doe@email.com',
                                   style: TextStyle(
                                     fontSize: 14,
-                                    color: Color(0xFF5D5D5D),
+                                    color: Colors.black
                                   ),
                                 ),
                               ),
@@ -89,7 +90,7 @@ class ProfilePage extends StatelessWidget {
                                   '📱 +62 812 1111 2222',
                                   style: TextStyle(
                                     fontSize: 14,
-                                    color: Color(0xFF5D5D5D),
+                                    color: Colors.black
                                   ),
                                 ),
                               ),
@@ -98,7 +99,7 @@ class ProfilePage extends StatelessWidget {
                                 '📍 Jakarta, Indonesia',
                                 style: TextStyle(
                                   fontSize: 14,
-                                  color: Color(0xFF5D5D5D),
+                                  color: Colors.black
                                 ),
                               ),
                             ],
@@ -143,7 +144,7 @@ class ProfilePage extends StatelessWidget {
                           ],
                         ),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(100),
                           child: Image.asset(
                             'assets/images/cat.jpg', // Same image or different
                             width: 120,
@@ -166,7 +167,7 @@ class ProfilePage extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFF5D5D5D),
+                                  color: Colors.black,
                                 ),
                               ),
                               
@@ -176,7 +177,7 @@ class ProfilePage extends StatelessWidget {
                                   '📧 sarah.smith@email.com',
                                   style: TextStyle(
                                     fontSize: 14,
-                                    color: Color(0xFF5D5D5D),
+                                    color: Colors.black,
                                   ),
                                 ),
                               ),
@@ -187,7 +188,7 @@ class ProfilePage extends StatelessWidget {
                                   '📱 +62 813 3333 4444',
                                   style: TextStyle(
                                     fontSize: 14,
-                                    color: Color(0xFF5D5D5D),
+                                    color: Colors.black,
                                   ),
                                 ),
                               ),
@@ -196,7 +197,7 @@ class ProfilePage extends StatelessWidget {
                                 '📍 Bandung, Indonesia',
                                 style: TextStyle(
                                   fontSize: 14,
-                                  color: Color(0xFF5D5D5D),
+                                  color: Colors.black,
                                 ),
                               ),
                             ],

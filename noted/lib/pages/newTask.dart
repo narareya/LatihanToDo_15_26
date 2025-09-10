@@ -6,6 +6,7 @@ import 'package:noted/components/custom_dropdown.dart';
 import 'package:noted/components/custom_text.dart';
 import 'package:noted/components/custom_textfield.dart';
 import 'package:noted/components/custom_button.dart';
+import 'package:noted/components/custom_color.dart';
 import 'package:noted/components/customradiobutton.dart';
 import 'package:noted/controller/ToDo_controller.dart';
 import 'package:noted/models/task_model.dart';
@@ -28,7 +29,7 @@ class AddTaskPage extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             padding: const EdgeInsets.all(25),
             decoration: BoxDecoration(
-              color: const Color(0xFFF0DAC7),
+              color: AppColors.lightCream,
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
@@ -131,9 +132,9 @@ class AddTaskPage extends StatelessWidget {
                               if (todoController.taskController.text.isEmpty || todoController.selectedCategory.value.isEmpty || todoController.selectedPriority.value.isEmpty || todoController.selectedDate.value == null) {
                                 // Show error if fields are empty
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
+                                  SnackBar(
                                     content: Text("⚠️ Please fill all fields"),
-                                    backgroundColor: Color(0xFFFF6F61),
+                                    backgroundColor: AppColors.dustyPink,
                                   ),
                                 );
                                 return;
@@ -152,9 +153,9 @@ class AddTaskPage extends StatelessWidget {
 
                               // feedback
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
+                                SnackBar(
                                   content: Text("✅ Task added!"),
-                                  backgroundColor: Color(0xFFA4B67C),
+                                  backgroundColor: AppColors.lightGreen,
                                 ),
                               );
 
@@ -172,7 +173,7 @@ class AddTaskPage extends StatelessWidget {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            backgroundColor: const Color(0xFFFE8A4A),
+                            backgroundColor: AppColors.paleYellow,
                           ),
                         ),
                       ),
