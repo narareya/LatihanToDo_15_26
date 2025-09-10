@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:noted/components/custom_datepicker.dart';
 import 'package:noted/components/custom_dropdown.dart';
 import 'package:noted/components/custom_text.dart';
 import 'package:noted/components/custom_textfield.dart';
 import 'package:noted/components/custom_button.dart';
 import 'package:noted/components/customradiobutton.dart';
+import 'package:noted/controller/ToDo_controller.dart';
+import 'package:noted/models/task_model.dart';
+import 'package:noted/routes/routes.dart';
 
 class AddTaskPage extends StatelessWidget {
-  const AddTaskPage({super.key});
+  final TodoController todoController = Get.find<TodoController>();
+  
+  AddTaskPage({super.key});
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +53,7 @@ class AddTaskPage extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 15),
                   child: CustomTextField(
-                    controller: TextEditingController(),
+                    controller: todoController.taskController,
                     label: '✏️ Task Name',
                     backgroundColor: Colors.white,
                   ),
@@ -56,49 +64,58 @@ class AddTaskPage extends StatelessWidget {
                   child: CustomDatePicker(
                     onDateSelected: (date) {
                       print("Date selected: $date");
-                      backgroundColor: const Color(0xFFFFFFFF);
                     },
                   ),
                 ),
                 
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
-                  child: CustomDropdown(
-                    items: const ['Daily', 'Personal', 'Work', 'Other'],
+                  child: Obx(() => CustomDropdown(
+                    items: todoController.tasks.keys.toList(),
+                    value: todoController.selectedCategory.value.isEmpty
+                        ? null
+                        : todoController.selectedCategory.value,
                     onChanged: (value) {
-                      print("Priority selected: $value");
+                      if (value != null) {
+                        todoController.selectedCategory.value = value;
+                      }
+                      print("Category selected: $value");
                     },
-                  ),
+                    placeholder: "Pilih kategori",
+                  ),) 
                 ),
                 
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 15),
-                  child: Row(
+                  child: Obx(() => Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CustomRadioButton(
                         label: 'High',
-                        isSelected: false,
+                        isSelected: todoController.selectedPriority.value == 'High',
                         onTap: () {
+                          todoController.selectedPriority.value = 'High';
                           print("High priority selected");
                         },
                       ),
                       CustomRadioButton(
                         label: 'Medium',
-                        isSelected: false,
+                        isSelected: todoController.selectedPriority.value == 'Medium',
                         onTap: () {
+                          todoController.selectedPriority.value = 'Medium';
                           print("Medium priority selected");
                         },
                       ),
                       CustomRadioButton(
                         label: 'Low',
-                        isSelected: false,
+                        isSelected: todoController.selectedPriority.value == 'Low',
                         onTap: () {
+                          todoController.selectedPriority.value = 'Low';
                           print("Low priority selected");
                         },
                       ),
                     ],
-                  ),
+                  ),) 
                 ),
                 
                 Container(
@@ -111,12 +128,37 @@ class AddTaskPage extends StatelessWidget {
                           child: CustomButton(
                             myText: "ADD",
                             onPressed: () {
+                              if (todoController.taskController.text.isEmpty || todoController.selectedCategory.value.isEmpty || todoController.selectedPriority.value.isEmpty || todoController.selectedDate.value == null) {
+                                // Show error if fields are empty
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text("⚠️ Please fill all fields"),
+                                    backgroundColor: Color(0xFFFF6F61),
+                                  ),
+                                );
+                                return;
+                              }
+
+                              final newTask = TaskModel(
+                                title: todoController.taskController.text,
+                                priority: todoController.selectedPriority.value
+                              );
+
+                              todoController.addTask(
+                                todoController.selectedCategory.value, 
+                                newTask
+                              );
+
+
+                              // feedback
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text("✅ Task added!"),
                                   backgroundColor: Color(0xFFA4B67C),
                                 ),
                               );
+
+                              Get.offNamed(AppRoutes.dashboard);
                             },
                             backgroundColor: const Color(0xFFA4B67C),
                           ),
