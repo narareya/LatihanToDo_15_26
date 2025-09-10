@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart'; // Added for Obx
 import 'package:noted/components/custom_button.dart';
+import 'package:noted/components/custom_color.dart';
 import 'package:noted/components/custom_text.dart'; // Assuming taskController is defined in this file
 import 'package:noted/components/todo_card.dart';
 import 'package:noted/controller/ToDo_controller.dart';
@@ -14,7 +15,7 @@ class HomePage extends StatelessWidget {
     final taskController = Get.find<TodoController>(); // Ensure taskController is defined
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF3E6DB),
+      backgroundColor: AppColors.lightCream,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),

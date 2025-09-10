@@ -4,6 +4,7 @@ import 'package:noted/components/custom_text.dart';
 import 'package:noted/components/custom_textfield.dart';
 import 'package:noted/controller/Auth_controller.dart';
 import 'package:get/get.dart';
+import 'package:noted/components/custom_color.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -12,9 +13,9 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFDFCAB5),
+      backgroundColor: AppColors.lightCream,
       appBar: AppBar(
-        backgroundColor: const Color(0xFFDFCAB5),
+        backgroundColor: AppColors.lightCream,
       ),
       body: Container(
         margin: const EdgeInsets.all(70),
@@ -27,7 +28,7 @@ class LoginPage extends StatelessWidget {
               text: "Noted!",
               fontSize: 50,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF5D5D5D),
+              color: AppColors.grayBrown,
               textAlign: TextAlign.center,
               fontFamily: 'CatPaws',
             ),
