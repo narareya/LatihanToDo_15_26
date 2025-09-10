@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:noted/routes/routes.dart';
 
 class AuthController extends GetxController {
   final emailController = TextEditingController();
@@ -29,6 +30,7 @@ class AuthController extends GetxController {
         "Login successful!",
         snackPosition: SnackPosition.TOP,
       );
+      Get.offAllNamed(AppRoutes.dashboard);
     } else {
       Get.snackbar(
         "Error", 

@@ -36,7 +36,7 @@ class CustomRadioButton extends StatelessWidget {
                   color: isSelected ? const Color(0xFFA15118) : const Color(0xFF8B4513),
                   width: 2,
                 ),
-                color: Colors.white,
+                
               ),
               child: isSelected
                   ? Center(
