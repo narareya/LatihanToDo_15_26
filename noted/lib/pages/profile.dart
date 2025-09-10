@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:noted/components/custom_color.dart';
+import 'package:noted/components/custom_text.dart';
+import 'package:noted/components/custom_color.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -32,23 +34,27 @@ class ProfilePage extends StatelessWidget {
                 child: IntrinsicHeight(
                   child: Row(
                     children: [
-                      // Profile Image 1
+                      // Profile Image 1 with Border
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(100),
+                          border: Border.all(
+                            color: AppColors.darkBrown, // ← Brown border
+                            width: 4, // ← Border thickness
+                          ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.brown.withOpacity(0.1),
+                              color: Colors.brown.withOpacity(0.3),
                               spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: const Offset(0, 3),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
                             ),
                           ],
                         ),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(100), // ← Slightly smaller for border effect
                           child: Image.asset(
-                            'assets/images/cat.jpg',
+                            'assets/images/Esta.jpeg',
                             width: 120,
                             height: 120,
                             fit: BoxFit.cover,
@@ -56,50 +62,83 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                       
-                      // Person 1 Info
+                      // Person 1 Info - Full Width Background
                       Expanded(
                         child: Container(
                           margin: const EdgeInsets.only(left: 20),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              const Text(
-                                '👤 John Doe',
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black
-                                ),
-                              ),
-                              
+                              // Name with full width background
                               Container(
-                                margin: const EdgeInsets.symmetric(vertical: 8),
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                margin: const EdgeInsets.only(bottom: 8),
+                                decoration: BoxDecoration(
+                                  color: AppColors.darkBrown,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                                 child: const Text(
-                                  '📧 john.doe@email.com',
+                                  'Esta Janitra Lituhayu',
                                   style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
                               
+                              // Email with full width background
                               Container(
-                                margin: const EdgeInsets.symmetric(vertical: 2),
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                margin: const EdgeInsets.only(bottom: 8),
+                                decoration: BoxDecoration(
+                                  color: AppColors.darkBrown,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                                 child: const Text(
-                                  '📱 +62 812 1111 2222',
+                                  'Absen: 15',
                                   style: TextStyle(
                                     fontSize: 14,
-                                    color: Colors.black
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
                               
-                              const Text(
-                                '📍 Jakarta, Indonesia',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.black
+                              // Phone with full width background
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                margin: const EdgeInsets.only(bottom: 8),
+                                decoration: BoxDecoration(
+                                  color: AppColors.darkBrown,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Text(
+                                  '+62 815-7500-7510',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              
+                              // Location with full width background
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                decoration: BoxDecoration(
+                                  color: AppColors.darkBrown,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Text(
+                                  'Github: github.com/narareya',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ],
@@ -111,12 +150,12 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               
-              // Profile Card 2 - Person 2 (Sarah)
+              // Profile Card 2 - Person 2 (Nandita)
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 padding: const EdgeInsets.all(25),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF0DAC7),
+                  color: AppColors.darkBrown, // ← Brown border
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
@@ -130,23 +169,27 @@ class ProfilePage extends StatelessWidget {
                 child: IntrinsicHeight(
                   child: Row(
                     children: [
-                      // Profile Image 2
+                      // Profile Image 2 with Pink Border
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(100),
+                          border: Border.all(
+                            color: AppColors.paleBrown, // ← Pink border to match theme
+                            width: 4, // ← Border thickness
+                          ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.brown.withOpacity(0.1),
+                              color: AppColors.catCream.withOpacity(0.3),
                               spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: const Offset(0, 3),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
                             ),
                           ],
                         ),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
+                          borderRadius: BorderRadius.circular(100), // ← Slightly smaller for border effect
                           child: Image.asset(
-                            'assets/images/cat.jpg', // Same image or different
+                            'assets/images/Dita.jpeg',
                             width: 120,
                             height: 120,
                             fit: BoxFit.cover,
@@ -154,27 +197,44 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                       
-                      // Person 2 Info
+                      // Person 2 Info - Full Width Background
                       Expanded(
                         child: Container(
                           margin: const EdgeInsets.only(left: 20),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              const Text(
-                                '👩 Sarah Smith',
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                              // Name with full width background
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                margin: const EdgeInsets.only(bottom: 8),
+                                decoration: BoxDecoration(
+                                  color: AppColors.paleBrown,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Text(
+                                  'Nandita Meddina',
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
                               
+                              // Email with full width background
                               Container(
-                                margin: const EdgeInsets.symmetric(vertical: 8),
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                margin: const EdgeInsets.only(bottom: 8),
+                                decoration: BoxDecoration(
+                                  color: AppColors.paleBrown,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                                 child: const Text(
-                                  '📧 sarah.smith@email.com',
+                                  'Absen: 26',
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.black,
@@ -182,10 +242,17 @@ class ProfilePage extends StatelessWidget {
                                 ),
                               ),
                               
+                              // Phone with full width background
                               Container(
-                                margin: const EdgeInsets.symmetric(vertical: 2),
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                margin: const EdgeInsets.only(bottom: 8),
+                                decoration: BoxDecoration(
+                                  color: AppColors.paleBrown,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                                 child: const Text(
-                                  '📱 +62 813 3333 4444',
+                                  '📱 +62 811-180-710',
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.black,
@@ -193,11 +260,20 @@ class ProfilePage extends StatelessWidget {
                                 ),
                               ),
                               
-                              const Text(
-                                '📍 Bandung, Indonesia',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.black,
+                              // Location with full width background
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                decoration: BoxDecoration(
+                                  color: AppColors.paleBrown,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Text(
+                                  'Github: github.com/namdnta',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
                             ],

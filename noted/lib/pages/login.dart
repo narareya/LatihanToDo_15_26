@@ -13,9 +13,9 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightCream,
+      backgroundColor: AppColors.catCream,
       appBar: AppBar(
-        backgroundColor: AppColors.lightCream,
+        backgroundColor: AppColors.catCream,
       ),
       body: Container(
         margin: const EdgeInsets.all(70),
@@ -28,7 +28,7 @@ class LoginPage extends StatelessWidget {
               text: "Noted!",
               fontSize: 50,
               fontWeight: FontWeight.bold,
-              color: AppColors.grayBrown,
+              color: Colors.black,
               textAlign: TextAlign.center,
               fontFamily: 'CatPaws',
             ),

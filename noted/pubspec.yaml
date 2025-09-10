@@ -23,6 +23,8 @@ flutter:
  
   assets:
     - assets/images/cat.jpg
+    - assets/images/Dita.jpeg
+    - assets/images/Esta.jpeg
 
   fonts:
     - family: CatPaws
