@@ -23,7 +23,7 @@ class AuthController extends GetxController {
       return;
     }
     
-    // Simple auth check (for demo)
+    // login
     if (email == "Narareya" && password == "nmdnta") {
       Get.snackbar(
         "Success", 

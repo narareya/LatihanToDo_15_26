@@ -47,7 +47,7 @@ class LoginPage extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 20),
               child: CustomTextField(
                 controller: authController.emailController,
-                label: "👤 Email",
+                label: "Email",
               ),
             ),
             
@@ -55,7 +55,7 @@ class LoginPage extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 20),
               child: CustomTextField(
                 controller: authController.passwordController,
-                label: "🗝️ Password",
+                label: "Password",
                 obscure: true,
               ),
             ),

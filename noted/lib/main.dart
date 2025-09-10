@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
       ),
 
       initialRoute: AppRoutes.loginPage,
-
       getPages: AppPages.pages,
     );
   }
