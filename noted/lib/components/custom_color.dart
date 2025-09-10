@@ -7,6 +7,7 @@ class AppColors {
   static const Color cream = Color(0xFFE6CDBA);
   static const Color lightCream = Color(0xFFF0DAC7);
   static const Color paleCream = Color(0xFFF4E5D9);
+  static const Color catCream = Color(0xFFDFCAB5);
   
   // White/Off-White
   static const Color pureWhite = Color(0xFFFFFFFF);
