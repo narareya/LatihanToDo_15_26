@@ -50,7 +50,8 @@ class AddTaskPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 
-                Container(
+                
+                Container( // nama task
                   margin: const EdgeInsets.symmetric(vertical: 15),
                   child: CustomTextField(
                     controller: todoController.taskController,
@@ -59,7 +60,8 @@ class AddTaskPage extends StatelessWidget {
                   ),
                 ),
                 
-                Container(
+                
+                Container( // date picker
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   child: CustomDatePicker(
                     onDateSelected: (date) {
@@ -68,7 +70,7 @@ class AddTaskPage extends StatelessWidget {
                   ),
                 ),
                 
-                Container(
+                Container( // dropdown category
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   child: Obx(() => CustomDropdown(
                     items: todoController.tasks.keys.toList(),
@@ -85,7 +87,7 @@ class AddTaskPage extends StatelessWidget {
                   ),) 
                 ),
                 
-                Container(
+                Container( // radiobutton priority
                   margin: const EdgeInsets.symmetric(vertical: 15),
                   child: Obx(() => Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -118,7 +120,7 @@ class AddTaskPage extends StatelessWidget {
                   ),) 
                 ),
                 
-                Container(
+                Container( // button add & cancel
                   margin: const EdgeInsets.only(top: 20),
                   child: Row(
                     children: [
@@ -128,8 +130,7 @@ class AddTaskPage extends StatelessWidget {
                           child: CustomButton(
                             myText: "ADD",
                             onPressed: () {
-                              if (todoController.taskController.text.isEmpty || todoController.selectedCategory.value.isEmpty || todoController.selectedPriority.value.isEmpty || todoController.selectedDate.value == null) {
-                                // Show error if fields are empty
+                              if (todoController.taskController.text.isEmpty || todoController.selectedCategory.value.isEmpty || todoController.selectedPriority.value.isEmpty) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                     content: Text("⚠️ Please fill all fields"),
@@ -139,16 +140,23 @@ class AddTaskPage extends StatelessWidget {
                                 return;
                               }
 
+                              // new task
                               final newTask = TaskModel(
                                 title: todoController.taskController.text,
                                 priority: todoController.selectedPriority.value
                               );
 
+                              // add task
                               todoController.addTask(
                                 todoController.selectedCategory.value, 
                                 newTask
                               );
 
+                              // clear
+                              todoController.taskController.clear();
+                              todoController.selectedCategory.value = '';
+                              todoController.selectedPriority.value = '';
+                              
 
                               // feedback
                               ScaffoldMessenger.of(context).showSnackBar(
