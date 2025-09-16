@@ -26,6 +26,9 @@ flutter:
     - assets/images/Dita.jpeg
     - assets/images/Esta.jpeg
     - assets/images/sad-cat.png
+    - assets/images/Task.png
+    - assets/images/history.png
+    - assets/images/profile.png
 
   fonts:
     - family: CatPaws

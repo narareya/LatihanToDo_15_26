@@ -28,7 +28,7 @@ class TaskCard extends StatelessWidget {
                 vertical: 8, horizontal: 12
               ),
               decoration: BoxDecoration(
-                color: AppColors.lightBlue,
+                color: AppColors.lightBeige,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
@@ -56,7 +56,7 @@ class TaskCard extends StatelessWidget {
                   style: TextStyle(
                     decoration: task.isDone ? 
                     TextDecoration.lineThrough : null,
-                    color: task.isDone ? Colors.grey : Colors.black,
+                    color: task.isDone ? Colors.black : Colors.black,
                   ),),
                   subtitle: Text(task.priority),
                   dense: true,
