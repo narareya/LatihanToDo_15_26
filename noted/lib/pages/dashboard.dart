@@ -14,10 +14,10 @@ class DashboardPage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: dashboardController.selectedIndex.value,
         onTap: dashboardController.changePage,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home',),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'History',),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile',),
+        items: [
+          BottomNavigationBarItem(icon: Image.asset('assets/images/Task.png', height: 35,), label: 'Home',),
+          BottomNavigationBarItem(icon: Image.asset('assets/images/history.png', height: 35,), label: 'History',),
+          BottomNavigationBarItem(icon: Image.asset('assets/images/profile.png', height: 35,), label: 'Profile',),
         ],
       ),
     ));
