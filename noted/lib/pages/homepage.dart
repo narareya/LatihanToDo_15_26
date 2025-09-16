@@ -20,47 +20,114 @@ class HomePage extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            const CustomText(
-              text: "Welcome Narareya!",
-              color: Colors.black87,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              textAlign: TextAlign.left,
+            
+            // Welcome Header
+            Container(
+              padding: const EdgeInsets.all(20),
+              margin: const EdgeInsets.only(bottom: 20),
+              decoration: BoxDecoration(
+                color: AppColors.lightBeige,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Column(
+                children: [
+                  CustomText(
+                    text: "Welcome, Narareya!",
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                    textAlign: TextAlign.center,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 8),
+                    child: CustomText(
+                      text: "Let's get productive!",
+                      fontSize: 16,
+                      color: Colors.black54,
+                      textAlign: TextAlign.center, fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 20),
 
-            // Category list
+            // Task Cards
             Obx(() {
-              // filter category
-              final nonEmptyCategories = taskController.tasks.entries
+              final categories = taskController.tasks.entries
                   .where((entry) => entry.value.isNotEmpty)
                   .toList();
 
+              // Empty State
+              if (categories.isEmpty) {
+                return Container(
+                  padding: const EdgeInsets.all(32),
+                  decoration: BoxDecoration(
+                    color: AppColors.lightGray,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        'assets/images/sad-cat.png',
+                        width: 100,
+                        height: 100,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 16),
+                        child: CustomText(
+                          text: "No tasks yet",
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black, textAlign: TextAlign.center,
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 8),
+                        child: CustomText(
+                          text: "Add your first task to get started!",
+                          fontSize: 14,
+                          color: Colors.black54,
+                          textAlign: TextAlign.center, 
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+              // Task List
               return ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: nonEmptyCategories.length,
+                itemCount: categories.length,
                 itemBuilder: (context, index) {
-                  final category = nonEmptyCategories[index].key;
-                  final tasks = nonEmptyCategories[index].value;
-
-                  return TaskCard(
-                    category: category, 
-                    tasks: tasks, 
-                    onToggle: (index) {
-                      taskController.toggleTaskStatus(category, index);
-                    });
+                  final category = categories[index].key;
+                  final tasks = categories[index].value;
+                  
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 12),
+                    child: TaskCard(
+                      category: category, 
+                      tasks: tasks, 
+                      onToggle: (taskIndex) {
+                        taskController.toggleTaskStatus(category, taskIndex);
+                      },
+                    ),
+                  );
                 },
               );
             }),
 
-            CustomButton(
-              myText: "ADD",
-              onPressed: () {
-                Get.toNamed(
-                  AppRoutes.addTaskPage,
-                );
-              },
+            // Add Button - Using CustomButton
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: CustomButton(
+                myText: "ADD TASK",
+                onPressed: () {
+                  Get.toNamed(AppRoutes.addTaskPage);
+                },
+              ),
             ),
           ],
         ),
