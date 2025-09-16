@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:noted/components/custom_color.dart';
-import 'package:noted/components/custom_text.dart';
-import 'package:noted/components/custom_color.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});

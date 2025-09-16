@@ -13,11 +13,10 @@ import 'package:noted/models/task_model.dart';
 import 'package:noted/routes/routes.dart';
 
 class AddTaskPage extends StatelessWidget {
-  final TodoController todoController = Get.find<TodoController>();
+  final TodoController taskController = Get.find<TodoController>();
   
   AddTaskPage({super.key});
  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +35,7 @@ class AddTaskPage extends StatelessWidget {
                   color: Colors.brown.withOpacity(0.2),
                   spreadRadius: 3,
                   blurRadius: 10,
-                  offset: const Offset(0, 5),
+                  offset : const Offset(0, 5),
                 ),
               ],
             ),
@@ -55,7 +54,7 @@ class AddTaskPage extends StatelessWidget {
                 Container( // nama task
                   margin: const EdgeInsets.symmetric(vertical: 15),
                   child: CustomTextField(
-                    controller: todoController.taskController,
+                    controller: taskController.taskController,
                     label: '✏️ Task Name',
                     backgroundColor: Colors.white,
                   ),
@@ -71,21 +70,68 @@ class AddTaskPage extends StatelessWidget {
                   ),
                 ),
                 
-                Container( // dropdown category
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  child: Obx(() => CustomDropdown(
-                    items: todoController.tasks.keys.toList(),
-                    value: todoController.selectedCategory.value.isEmpty
-                        ? null
-                        : todoController.selectedCategory.value,
-                    onChanged: (value) {
-                      if (value != null) {
-                        todoController.selectedCategory.value = value;
-                      }
-                      print("Category selected: $value");
-                    },
-                    placeholder: "Pilih kategori",
-                  ),) 
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 15),
+                  child: Obx(() {
+                    final categories = taskController.tasks.keys.toList();
+                    final items = [... categories, "Add New Category"];
+
+                    return CustomDropdown(
+                      items: items,
+                      value: taskController.selectedCategory.value.isEmpty
+                          ? null
+                          : taskController.selectedCategory.value,
+                      onChanged: (value) {
+                        if (value == "Add New Category") {
+                          taskController.categoryController.clear();
+
+                          print("New category clicked");
+
+                          Get.defaultDialog(
+                            title: "New Category",
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+
+                              children: [
+                                TextField(
+                                  controller: taskController.categoryController,
+                                  decoration: InputDecoration(
+                                    hintText: "Category Name"
+                                  ),
+                                ),
+
+                                SizedBox(height: 16,),
+
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Expanded(
+                                      child: CustomButton(
+                                        myText: "Add", 
+                                        onPressed: () {
+                                            final newCategory = taskController.categoryController.text.trim();
+                                            if (newCategory.isNotEmpty) {
+                                              taskController.addCategory(newCategory);
+                                              Get.back();
+                                            }
+                                        }
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          );
+                        } else if (value != null) {
+                          taskController.selectedCategory.value = value;
+                          print("Selected category: ${taskController.selectedCategory.value}");
+                        }
+                      },
+                      placeholder: "Select Category",
+                    );
+                  }),
                 ),
                 
                 Container( // radiobutton priority
@@ -95,25 +141,25 @@ class AddTaskPage extends StatelessWidget {
                     children: [
                       CustomRadioButton(
                         label: 'High',
-                        isSelected: todoController.selectedPriority.value == 'High',
+                        isSelected: taskController.selectedPriority.value == 'High',
                         onTap: () {
-                          todoController.selectedPriority.value = 'High';
+                          taskController.selectedPriority.value = 'High';
                           print("High priority selected");
                         },
                       ),
                       CustomRadioButton(
                         label: 'Medium',
-                        isSelected: todoController.selectedPriority.value == 'Medium',
+                        isSelected: taskController.selectedPriority.value == 'Medium',
                         onTap: () {
-                          todoController.selectedPriority.value = 'Medium';
+                          taskController.selectedPriority.value = 'Medium';
                           print("Medium priority selected");
                         },
                       ),
                       CustomRadioButton(
                         label: 'Low',
-                        isSelected: todoController.selectedPriority.value == 'Low',
+                        isSelected: taskController.selectedPriority.value == 'Low',
                         onTap: () {
-                          todoController.selectedPriority.value = 'Low';
+                          taskController.selectedPriority.value = 'Low';
                           print("Low priority selected");
                         },
                       ),
@@ -132,11 +178,11 @@ class AddTaskPage extends StatelessWidget {
                           child: CustomButton( 
                             myText: "ADD",
                             onPressed: () {
-                              if (todoController.taskController.text.isEmpty || todoController.selectedCategory.value.isEmpty || todoController.selectedPriority.value.isEmpty) {
+                              if (taskController.taskController.text.isEmpty || taskController.selectedCategory.value.isEmpty || taskController.selectedPriority.value.isEmpty) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text("⚠️ Please fill all fields"),
-                                    backgroundColor: AppColors.dustyPink,
+                                    backgroundColor: const Color.fromARGB(255, 179, 24, 24),
                                   ),
                                 );
                                 return;
@@ -144,31 +190,32 @@ class AddTaskPage extends StatelessWidget {
 
                               // new task
                               final newTask = TaskModel(
-                                title: todoController.taskController.text,
-                                priority: todoController.selectedPriority.value
+                                title: taskController.taskController.text,
+                                priority: taskController.selectedPriority.value
                               );
 
                               // add task
-                              todoController.addTask(
-                                todoController.selectedCategory.value, 
+                              taskController.addTask(
+                                taskController.selectedCategory.value, 
                                 newTask
                               );
 
                               // clear
-                              todoController.taskController.clear();
-                              todoController.selectedCategory.value = '';
-                              todoController.selectedPriority.value = '';
+                              taskController.taskController.clear();
+                              taskController.selectedCategory.value = '';
+                              taskController.selectedPriority.value = '';
                               
 
                               // notification
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text("✅ Task added!"),
-                                  backgroundColor: AppColors.lightGreen,
+                                  backgroundColor: AppColors.paleGreen,
                                 ),
                               );
 
-                              Get.offNamed(AppRoutes.dashboard);
+                              Get.toNamed(AppRoutes.dashboard,
+                              arguments: taskController.tasks.keys.toList(),);
                             },
                             backgroundColor: const Color(0xFFA4B67C),
                           ),
