@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noted/routes/pages.dart';
 import 'package:noted/routes/routes.dart';
+import 'controller/ToDo_controller.dart';
 
 
 void main() {
+  Get.put(TodoController());
   runApp(const MyApp());
 }
 
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
 
-      initialRoute: AppRoutes.loginPage,
+      initialRoute: AppRoutes.homePage,
       getPages: AppPages.pages,
     );
   }
