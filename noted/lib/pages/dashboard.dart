@@ -15,9 +15,9 @@ class DashboardPage extends StatelessWidget {
         currentIndex: dashboardController.selectedIndex.value,
         onTap: dashboardController.changePage,
         items: [
-          BottomNavigationBarItem(icon: Image.asset('assets/images/Task.png', height: 35,), label: 'Home',),
-          BottomNavigationBarItem(icon: Image.asset('assets/images/history.png', height: 35,), label: 'History',),
-          BottomNavigationBarItem(icon: Image.asset('assets/images/profile.png', height: 35,), label: 'Profile',),
+          BottomNavigationBarItem(icon: Image.asset('assets/images/icons/cat-home2.png', height: 35,), label: 'Home',),
+          BottomNavigationBarItem(icon: Image.asset('assets/images/icons/cat-history.png', height: 35,), label: 'History',),
+          BottomNavigationBarItem(icon: Image.asset('assets/images/icons/cat-user.png', height: 35,), label: 'Profile',),
         ],
       ),
     ));
