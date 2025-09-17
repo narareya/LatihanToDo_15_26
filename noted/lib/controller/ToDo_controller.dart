@@ -43,18 +43,6 @@ import 'package:noted/models/task_model.dart';
       }
     }
 
-    void removeCategory(String category) { // hapus category
-      tasks.remove(category);
-      tasks.refresh();
-    }
-
-    void renameCategory(String oldName, String newName) { // rename category
-      if (tasks.containsKey(oldName) && !tasks.containsKey(newName)) {
-        tasks[newName] = tasks.remove(oldName)!;
-        tasks.refresh();
-      }
-    }
-
     void toggleTaskStatus(String category, int index, {bool fromDone = false}) {
       final source = fromDone ? doneTasks : tasks;
       final target = fromDone ? tasks : doneTasks;
