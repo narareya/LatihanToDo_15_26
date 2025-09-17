@@ -64,10 +64,10 @@ class AddTaskPage extends StatelessWidget {
                 Container( // date picker
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   child: CustomDatePicker(
-                    onDateSelected: (date) {
-                      print("Date selected: $date");
-                    },
-                  ),
+  onDateSelected: (date) {
+    Get.find<TodoController>().setDueDate(date);
+  },
+)
                 ),
                 
                 Container(
@@ -189,10 +189,12 @@ class AddTaskPage extends StatelessWidget {
                               }
 
                               // new task
-                              final newTask = TaskModel(
-                                title: taskController.taskController.text,
-                                priority: taskController.selectedPriority.value
-                              );
+final controller = Get.find<TodoController>();
+TaskModel newTask = TaskModel(
+  title: controller.taskController.text,
+  priority: controller.selectedPriority.value,
+  // dueDate akan di-set otomatis di controller.addTask
+);
 
                               // add task
                               taskController.addTask(

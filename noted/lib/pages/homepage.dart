@@ -29,29 +29,30 @@ class HomePage extends StatelessWidget {
                 color: AppColors.lightBeige,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Column(
+              child: Column(
                 children: [
-                  CustomText(
-                    text: "Welcome, Narareya!",
+                  const CustomText(
+                    text: "👋 Welcome, Narareya!",
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                     textAlign: TextAlign.center,
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 8),
+                    padding: const EdgeInsets.only(top: 8),
                     child: CustomText(
-                      text: "Let's get productive!",
+                      text: "Let's get productive! 🚀",
                       fontSize: 16,
                       color: Colors.black54,
-                      textAlign: TextAlign.center, fontWeight: FontWeight.normal,
+                      textAlign: TextAlign.center,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                 ],
               ),
             ),
 
-            // Task Cards
+            // Task Cards - USE CUSTOM CARD
             Obx(() {
               final categories = taskController.tasks.entries
                   .where((entry) => entry.value.isNotEmpty)
@@ -65,23 +66,20 @@ class HomePage extends StatelessWidget {
                     color: AppColors.lightGray,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Column(
+                  child: const Column(
                     children: [
-                      Image.asset(
-                        'assets/images/sad-cat.png',
-                        width: 100,
-                        height: 100,
-                      ),
-                      const Padding(
+                      Icon(Icons.task_alt, size: 48, color: Colors.black54),
+                      Padding(
                         padding: EdgeInsets.only(top: 16),
                         child: CustomText(
                           text: "No tasks yet",
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          color: Colors.black, textAlign: TextAlign.center,
+                          color: Colors.black, 
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(top: 8),
                         child: CustomText(
                           text: "Add your first task to get started!",
@@ -96,7 +94,7 @@ class HomePage extends StatelessWidget {
                 );
               }
 
-              // Task List
+              // Task List - SIMPLE dengan CustomCard
               return ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -105,21 +103,19 @@ class HomePage extends StatelessWidget {
                   final category = categories[index].key;
                   final tasks = categories[index].value;
                   
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 12),
-                    child: TaskCard(
-                      category: category, 
-                      tasks: tasks, 
-                      onToggle: (taskIndex) {
-                        taskController.toggleTaskStatus(category, taskIndex);
-                      },
-                    ),
+                  // USE CUSTOM CARD - SIMPLE!
+                  return TaskCard(
+                    category: category,
+                    tasks: tasks,
+                    onToggle: (taskIndex) {
+                      taskController.toggleTaskStatus(category, taskIndex);
+                    },
                   );
                 },
               );
             }),
 
-            // Add Button - Using CustomButton
+            // Add Button
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: CustomButton(
