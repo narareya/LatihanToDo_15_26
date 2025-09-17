@@ -78,7 +78,7 @@ class HistoryPage extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-Image.asset(
+                      Image.asset(
                         'assets/images/sad-cat.png',
                         width: 100,
                         height: 100,
