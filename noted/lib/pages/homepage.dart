@@ -115,17 +115,25 @@ class HomePage extends StatelessWidget {
               );
             }),
 
-            // Add Button
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: CustomButton(
-                myText: "ADD TASK",
-                onPressed: () {
-                  Get.toNamed(AppRoutes.addTaskPage);
-                },
-              ),
-            ),
+            // Extra space for floating button
+            const SizedBox(height: 80),
           ],
+        ),
+      ),
+      
+      // Floating Action Button
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Get.toNamed(AppRoutes.addTaskPage);
+        },
+        backgroundColor: AppColors.mediumBrown,
+        foregroundColor: Colors.white,
+        icon: const Icon(Icons.add),
+        label: const Text(
+          "ADD TASK",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
