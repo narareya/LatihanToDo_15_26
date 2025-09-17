@@ -97,12 +97,42 @@ class TaskCard extends StatelessWidget {
                               ),
                             ),
 
-                            // Task Priority
+                            // Task Priority with Color Dot
                             if (task.priority != null && task.priority!.isNotEmpty)
                               Padding(
                                 padding: const EdgeInsets.only(top: 4),
+                                child: Row(
+                                  children: [
+                                    // Color Dot
+                                    Container(
+                                      width: 12,
+                                      height: 12,
+                                      decoration: BoxDecoration(
+                                        color: _getPriorityColor(task.priority!),
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 6),
+                                    // Priority Text
+                                    Text(
+                                      "Priority: ${task.priority}",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: isCompleted 
+                                            ? Colors.grey.shade500 
+                                            : Colors.black54,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                            // Due Date with Debug
+                            if (task.dueDate != null)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 2),
                                 child: Text(
-                                  "Priority: ${task.priority}",
+                                  "📆 ${_formatDate(task.dueDate!)}",
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: isCompleted 
@@ -110,25 +140,7 @@ class TaskCard extends StatelessWidget {
                                         : Colors.black54,
                                   ),
                                 ),
-                              ),
-
-                            // Due Date with Debug
-                            if (task.dueDate != null)
-Padding(
-  padding: const EdgeInsets.only(top: 2),
-  child: Text(
-    task.dueDate != null 
-        ? "Due date: ${_formatDate(task.dueDate!)}"
-        : "Debug: dueDate is null - ${task.dueDate}",
-    style: TextStyle(
-      fontSize: 14,
-      color: task.dueDate != null 
-          ? (isCompleted ? Colors.grey.shade500 : Colors.black54)
-          : Colors.red,
-      fontWeight: task.dueDate != null ? FontWeight.normal : FontWeight.bold,
-    ),
-  ),
-)
+                              )
                             else
                               // Debug - show if no date
                               Padding(
@@ -153,6 +165,20 @@ Padding(
         ),
       ),
     );
+  }
+
+  // Helper method for priority colors
+  Color _getPriorityColor(String priority) {
+    switch (priority.toLowerCase()) {
+      case 'high':
+        return Colors.red.shade400;
+      case 'medium':
+        return Colors.orange.shade400;
+      case 'low':
+        return Colors.green.shade400;
+      default:
+        return Colors.grey.shade400;
+    }
   }
 
   // Helper method for date formatting
