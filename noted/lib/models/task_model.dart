@@ -1,13 +1,13 @@
 class TaskModel {
-  String title;
-  String priority;
-  DateTime? dueDate;
-  bool isDone;
+  String? title;
+  String? priority;
+  bool? isDone;
+  DateTime? dueDate; // ← Pastikan field ini ada
 
   TaskModel({
-    required this.title,
-    required this.priority,
-    this.dueDate,
+    this.title,
+    this.priority,
     this.isDone = false,
+    this.dueDate, // ← Dan di constructor
   });
 }
