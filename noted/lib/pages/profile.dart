@@ -13,6 +13,19 @@ class ProfilePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Container(
+                margin: const EdgeInsets.only(top: 40, bottom: 20),
+                child: const Text(
+                  'Meet The Developers!',
+                  style: TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.brown,
+                    fontFamily: 'CatPaws',
+                  ),
+                ),
+              ),
+
               // Profile Card 1 - Person 1 (John)
               Container(
                 margin: const EdgeInsets.all(20),
@@ -250,7 +263,7 @@ class ProfilePage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: const Text(
-                                  '📱 +62 811-180-710',
+                                  '+62 811-180-710',
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.black,
