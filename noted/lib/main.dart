@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
 
-      initialRoute: AppRoutes.loginPage,
+      initialRoute: AppRoutes.splashPage,
       getPages: AppPages.pages,
     );
   }

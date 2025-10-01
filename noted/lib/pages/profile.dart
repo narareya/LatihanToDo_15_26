@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:noted/components/custom_button.dart';
 import 'package:noted/components/custom_color.dart';
+import 'package:noted/controller/Auth_controller.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -295,6 +298,9 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
+            
+              CustomButton(myText: "Logout", onPressed: () {
+              })
             ],
           ),
         ),
