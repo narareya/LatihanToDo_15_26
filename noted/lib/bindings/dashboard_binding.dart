@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:noted/controller/ToDo_controller.dart';
 import 'package:noted/controller/dashboard_controller.dart';
 
 class DashboardBinding extends Bindings {
@@ -6,6 +7,7 @@ class DashboardBinding extends Bindings {
   void dependencies() {
     // TODO: implement dependencies
     Get.lazyPut<DashboardController>(() => DashboardController());
+    Get.lazyPut<TodoController>(()=>TodoController());
   }
 
 }
