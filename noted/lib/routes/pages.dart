@@ -16,11 +16,11 @@ import 'package:noted/routes/routes.dart';
 class AppPages {
   static final pages = [
     GetPage(name: AppRoutes.loginPage, page: () => LoginPage(), binding: AuthBinding()),
-    GetPage(name: AppRoutes.homePage, page: () => HomePage()),
-    GetPage(name: AppRoutes.historyPage, page: () => HistoryPage()),
+    GetPage(name: AppRoutes.homePage, page: () => HomePage(), binding: HomeBinding()),
+    GetPage(name: AppRoutes.historyPage, page: () => HistoryPage(), binding: HomeBinding()),
     GetPage(name: AppRoutes.profilePage, page: () => ProfilePage(), binding: AuthBinding()),
     GetPage(name: AppRoutes.dashboard, page: () => DashboardPage(), binding: DashboardBinding()),
-    GetPage(name: AppRoutes.addTaskPage, page: () => AddTaskPage()),
+    GetPage(name: AppRoutes.addTaskPage, page: () => AddTaskPage(), binding: HomeBinding()),
     GetPage(name: AppRoutes.splashPage, page: () => SplashscreenPage(), binding: SplashscreenBinding()),
   ];
 }
