@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
+import 'package:noted/controller/Widget_controller.dart';
 import 'package:noted/controller/dashboard_controller.dart';
+import 'package:noted/pages/dashboard_widgets/dashboard_mobile.dart';
+import 'package:noted/pages/dashboard_widgets/dashboard_wide.dart';
 
 class DashboardPage extends StatelessWidget {
   DashboardPage({super.key});
   
   final dashboardController = Get.find<DashboardController>();
+  final controller = Get.find<WidgetController>();
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Scaffold(
-      body: dashboardController.pages[dashboardController.selectedIndex.value],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: dashboardController.selectedIndex.value,
-        onTap: dashboardController.changePage,
-        items: [
-          BottomNavigationBarItem(icon: Image.asset('assets/images/icons/cat-home2.png', height: 35,), label: 'Home',),
-          BottomNavigationBarItem(icon: Image.asset('assets/images/icons/cat-history.png', height: 35,), label: 'History',),
-          BottomNavigationBarItem(icon: Image.asset('assets/images/icons/cat-user.png', height: 35,), label: 'Profile',),
-        ],
-      ),
-    ));
+    return Scaffold(
+      body: LayoutBuilder(
+        builder: (context, constraints){
+          controller.updateLayout(constraints);
+          return Obx(()=> controller.isMobile.value ? DashboardMobile() : DashboardWide() );
+        }
+        )
+    );
   }
 }
