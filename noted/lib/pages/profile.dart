@@ -6,6 +6,8 @@ import 'package:noted/pages/profile_widgets/profile_wide.dart';
 
 
 class ProfilePage extends StatelessWidget {
+  ProfilePage({super.key});
+final authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
