@@ -110,6 +110,46 @@ class HomePage extends StatelessWidget {
                     onToggle: (taskIndex) {
                       taskController.toggleTaskStatus(category, taskIndex);
                     },
+                    onLongPress: (taskIndex) {
+                      showModalBottomSheet(
+                        context: context, 
+                        builder: (_) {
+                          final task = tasks[taskIndex];
+                          return Container(
+                            padding: const EdgeInsets.all(15),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ListTile(
+                                  title: const Text('Edit Task'),
+                                  onTap: () {
+                                    Get.toNamed(AppRoutes.addTaskPage, arguments: {'task' : task});
+                                  },
+                                ),
+                                ListTile(
+                                  title: const Text('Delete Task'),
+                                  onTap: () async {
+                                    Navigator.pop(context);
+
+                                    final result = await showDialog<bool>(context: context, builder: (context) => AlertDialog(
+                                      title: const Text('Delete Task?'),
+                                      content: Text('Are you sure you want to delete this task?'),
+                                      actions: [
+                                        TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('No')),
+                                        TextButton(onPressed: () => Navigator.pop(context, true), child: const Text('Yes')),
+                                      ],
+                                    ),);
+
+                                    if (result == true) {
+                                      taskController.deleteTask(category, taskIndex);
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
+                        });
+                    },
                   );
                 },
               );

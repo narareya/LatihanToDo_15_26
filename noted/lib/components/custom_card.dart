@@ -6,8 +6,9 @@ class TaskCard extends StatelessWidget {
   final String category;
   final List<TaskModel> tasks;
   final Function(int) onToggle;
+  final Function(int)? onLongPress;
 
-  const TaskCard({super.key, required this.category, required this.tasks, required this.onToggle});
+  const TaskCard({super.key, required this.category, required this.tasks, required this.onToggle, this.onLongPress});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,11 @@ class TaskCard extends StatelessWidget {
                 final task = entry.value;
                 final isCompleted = task.isDone ?? false;
 
-                return Container(
+                return GestureDetector(
+                  onLongPress: () {
+                    if (onLongPress != null) onLongPress!(taskIndex);
+                  },
+                  child: Container(
                   margin: const EdgeInsets.only(bottom: 8),
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -158,6 +163,7 @@ class TaskCard extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
                 );
               }).toList(),
             ),
