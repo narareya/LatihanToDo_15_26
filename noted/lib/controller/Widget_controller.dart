@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class WidgetController extends GetxController{
-  var isMobile = true.obs;
+  var isWideScreen = false.obs;
 
-  void updateLayout(BoxConstraints constraints){
-    isMobile.value = constraints.maxWidth < 600;
+  void updateLayout(BuildContext context) {
+    // Ambil ukuran layar
+    double screenWidth = MediaQuery.of(context).size.width;
+    
+    // Set breakpoint (misalnya 600px)
+    isWideScreen.value = screenWidth > 600;
+      
   }
-
 }
