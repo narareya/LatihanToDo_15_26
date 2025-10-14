@@ -161,7 +161,7 @@ const HistoryMobile({super.key});
                                     ),);
 
                                     if (result == true) {
-                                      taskController.deleteTask(category, taskIndex);
+                                      taskController.deleteTask(category, taskIndex, fromDone: true);
                                     }
                                   },
                                 ),

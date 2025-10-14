@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noted/controller/ToDo_controller.dart';
 import 'package:noted/controller/Widget_controller.dart';
+import 'package:noted/pages/homepage_widgets/homepage_mobile.dart';
 import 'package:noted/pages/homepage_widgets/homepage_wide.dart';
 
 
@@ -18,8 +19,8 @@ class HomePage extends StatelessWidget {
         widgetController.updateLayout(context);
         
         return Obx(() => widgetController.isWideScreen.value 
-          ? HomepageWide() 
-          : HomepageWide()
+          ? HomepageWide()
+          : HomepageMobile()
         );
       },
     );

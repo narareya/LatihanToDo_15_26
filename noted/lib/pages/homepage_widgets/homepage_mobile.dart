@@ -106,13 +106,18 @@ const HomepageMobile({super.key});
                     category: category,
                     tasks: tasks,
                     onToggle: (taskIndex) {
+                      if (tasks.isEmpty || taskIndex >= tasks.length) return;
                       taskController.toggleTaskStatus(category, taskIndex);
                     },
                     onLongPress: (taskIndex) {
+                      if (tasks.isEmpty || taskIndex >= tasks.length) return;
+                      final task = tasks[taskIndex];
+
                       showModalBottomSheet(
                         context: context, 
+                        isScrollControlled: true,
                         builder: (_) {
-                          final task = tasks[taskIndex];
+                          
                           return Container(
                             padding: const EdgeInsets.all(15),
                             child: Column(
@@ -121,6 +126,8 @@ const HomepageMobile({super.key});
                                 ListTile(
                                   title: const Text('Edit Task'),
                                   onTap: () {
+                                    Navigator.pop(context);
+                                    print("Editing Task >>> $task");
                                     Get.toNamed(AppRoutes.addTaskPage, arguments: {'task' : task});
                                   },
                                 ),
@@ -139,7 +146,7 @@ const HomepageMobile({super.key});
                                     ),);
 
                                     if (result == true) {
-                                      taskController.deleteTask(category, taskIndex);
+                                      taskController.deleteTask(category, taskIndex, fromDone: false);
                                     }
                                   },
                                 ),
