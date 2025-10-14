@@ -24,6 +24,16 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
     selectedDate = widget.initialDate;
   }
 
+  void didUpdateWidget(covariant CustomDatePicker oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.initialDate != widget.initialDate) {
+      setState(() {
+        selectedDate = widget.initialDate;
+      });
+    }
+  }
+
   String _formatDate(DateTime date) {
     final months = [
       '', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',

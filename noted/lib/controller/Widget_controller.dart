@@ -9,7 +9,7 @@ class WidgetController extends GetxController{
     double screenWidth = MediaQuery.of(context).size.width;
     
     // Set breakpoint (misalnya 600px)
-    isWideScreen.value = screenWidth > 600;
+    isWideScreen.value = screenWidth > 800;
       
   }
 }

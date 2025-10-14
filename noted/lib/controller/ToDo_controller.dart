@@ -17,15 +17,6 @@ class TodoController extends GetxController {
   void onInit() {
     super.onInit();
 
-    final args = Get.arguments as Map<String, dynamic>?;
-    if (args != null && args['task'] != null) {
-      taskToEdit = args['task'] as TaskModel;
-      taskController.text = taskToEdit!.title ?? '';
-      selectedCategory.value = taskToEdit!.category ?? '';
-      selectedPriority.value = taskToEdit!.priority ?? '';
-      selectedDate.value = taskToEdit!.dueDate;
-    }
-
     fetchTasks();
   }
 
@@ -56,7 +47,7 @@ class TodoController extends GetxController {
     doneTasks.refresh();
   }
 
-
+  // add category
   void addCategory(String category) {
     if (!tasks.containsKey(category)) {
       tasks[category] = <TaskModel>[].obs;
@@ -81,6 +72,8 @@ class TodoController extends GetxController {
     print("DEBUG: Selected date set to: $date"); // ← Debug
   }
 
+
+  // add task
   Future<void> addTask(String category, TaskModel task) async {
     // Set due date dari selectedDate
     if (selectedDate.value != null) {
@@ -112,6 +105,7 @@ class TodoController extends GetxController {
     }
   }
 
+  // save task
   Future<void> saveTask() async {
     if (taskToEdit == null) {
       final task = TaskModel(
@@ -147,42 +141,43 @@ class TodoController extends GetxController {
      // checked unchecked
     final taskList = source[category];
 
-    if (taskList != null && index < taskList.length) {
-      final task = taskList[index];
-      task.isDone = !(task.isDone ?? false);
+    if (taskList == null || index >= taskList.length) return;
 
-      await _dbHelper.updateTasks(task);
+    final task = taskList[index];
+    task.isDone = !(task.isDone ?? false);
 
-      target.putIfAbsent(category, () => <TaskModel>[].obs);
-      target[category]!.add(task);
-      taskList.removeAt(index);
+    await _dbHelper.updateTasks(task);
 
-      tasks.refresh();
-      doneTasks.refresh();
-    }
+    target.putIfAbsent(category, () => <TaskModel>[].obs);
+    target[category]!.add(task);
+    taskList.removeAt(index);
+
+    tasks.refresh();
+    doneTasks.refresh();
   }
 
-  Future<void> deleteTask(String category, int index) async {
-    List<TaskModel>? taskList;
+  Future<void> deleteTask(String category, int index, {bool fromDone = false}) async {
+    final source = fromDone ? doneTasks : tasks;
+    final taskList = source[category];
 
-    if (tasks[category] != null && index < tasks[category]!.length) {
-      taskList = tasks[category];
-    }
+    if (taskList == null || index >= taskList.length) return;
 
-    else if (doneTasks[category] != null && index < doneTasks[category]!.length) {
-      taskList = doneTasks[category];
-    }
+    final task = taskList[index];
 
-    if (taskList != null) {
-      final task = taskList[index];
+    await _dbHelper.deleteTasks(task.id!);
 
-      // hapus dari db
-      await _dbHelper.deleteTasks(task.id!);
+    taskList.removeAt(index);
 
-      // hapus dari map
-      taskList.removeAt(index);
-      tasks.refresh();
-      doneTasks.refresh();
-    }
+    tasks.refresh();
+    doneTasks.refresh();
+  }
+
+
+  void initEditTask(TaskModel task) {
+    taskToEdit = task;
+    taskController.text = taskToEdit!.title ?? '';
+    selectedCategory.value = taskToEdit!.category ?? '';
+    selectedPriority.value = taskToEdit!.priority ?? '';
+    selectedDate.value = taskToEdit!.dueDate;
   }
 }

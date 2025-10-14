@@ -18,6 +18,21 @@ class AddTaskMobile extends StatelessWidget {
  
   @override
   Widget build(BuildContext context) {
+    final args = Get.arguments;
+    TaskModel? task;
+
+    if (args is Map<String, dynamic> && args['task'] is TaskModel) {
+      task = args['task'] as TaskModel;
+    }
+
+    print("received task : $task");
+
+    if (task != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        taskController.initEditTask(task!);
+    });
+}
+
     return Scaffold(
       backgroundColor: const Color(0xFFDFCAB5),
       body: Center(
@@ -61,11 +76,13 @@ class AddTaskMobile extends StatelessWidget {
                 // Date Picker
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
-                  child: CustomDatePicker(
+                  child: Obx(() => CustomDatePicker(
+                    initialDate: taskController.selectedDate.value,
                     onDateSelected: (date) {
                       taskController.setDueDate(date);
                     },
                   ),
+                ), 
                 ),
 
                 // Category Dropdown
@@ -160,8 +177,8 @@ class AddTaskMobile extends StatelessWidget {
                         child: Container(
                           margin: const EdgeInsets.only(right: 8),
                           child: CustomButton(
-                            myText: "ADD",
-                            onPressed: () {
+                            myText: task != null ? "SAVE" : "ADD",
+                            onPressed: () async {
                               if (taskController.taskController.text.isEmpty ||
                                   taskController.selectedCategory.value.isEmpty ||
                                   taskController.selectedPriority.value.isEmpty) {
@@ -174,32 +191,16 @@ class AddTaskMobile extends StatelessWidget {
                                 return;
                               }
 
-                              TaskModel newTask = TaskModel(
-                                title: taskController.taskController.text,
-                                priority: taskController.selectedPriority.value,
-                              );
-
-                              taskController.addTask(
-                                taskController.selectedCategory.value,
-                                newTask,
-                              );
-
-                              // Clear fields
-                              taskController.taskController.clear();
-                              taskController.selectedCategory.value = '';
-                              taskController.selectedPriority.value = '';
+                              await taskController.saveTask();
 
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: const Text("✅ Task added!"),
+                                  content: Text(task != null ? "✅ Task updated!" : "✅ Task added!"),
                                   backgroundColor: AppColors.paleGreen,
                                 ),
                               );
-
-                              Get.toNamed(
-                                AppRoutes.dashboard,
-                                arguments: taskController.tasks.keys.toList(),
-                              );
+                              
+                              Get.offNamed(AppRoutes.dashboard);
                             },
                             backgroundColor: const Color(0xFFA4B67C),
                           ),
