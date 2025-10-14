@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noted/controller/Widget_controller.dart';
+import 'package:noted/controller/Auth_controller.dart';
 import 'package:noted/pages/profile_widgets/profile_mobile.dart';
 import 'package:noted/pages/profile_widgets/profile_wide.dart';
 
