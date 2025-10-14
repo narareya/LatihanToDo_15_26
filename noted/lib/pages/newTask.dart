@@ -1,250 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:noted/components/custom_datepicker.dart';
-import 'package:noted/components/custom_dropdown.dart';
-import 'package:noted/components/custom_text.dart';
-import 'package:noted/components/custom_textfield.dart';
-import 'package:noted/components/custom_button.dart';
-import 'package:noted/components/custom_color.dart';
-import 'package:noted/components/customradiobutton.dart';
 import 'package:noted/controller/ToDo_controller.dart';
-import 'package:noted/models/task_model.dart';
-import 'package:noted/routes/routes.dart';
+import 'package:noted/controller/Widget_controller.dart';
+import 'package:noted/pages/form_widgets/newTask_mobile.dart';
+import 'package:noted/pages/form_widgets/newTask_wide.dart';
+
+
 
 class AddTaskPage extends StatelessWidget {
-  final TodoController taskController = Get.find<TodoController>();
+    AddTaskPage({super.key});
   
-  AddTaskPage({super.key});
- 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFDFCAB5),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Container(
-            width: double.infinity,
-            margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-            padding: const EdgeInsets.all(25),
-            decoration: BoxDecoration(
-              color: AppColors.lightCream,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.brown.withOpacity(0.2),
-                  spreadRadius: 3,
-                  blurRadius: 10,
-                  offset : const Offset(0, 5),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const CustomText(
-                  text: '📝 Add New Task!',
-                  color: Color(0xFF5D5D5D),
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                  textAlign: TextAlign.center,
-                ),
-                
-                
-                Container( // nama task
-                  margin: const EdgeInsets.symmetric(vertical: 15),
-                  child: CustomTextField(
-                    controller: taskController.taskController,
-                    label: '✏️ Task Name',
-                    backgroundColor: Colors.white,
-                  ),
-                ),
-                
-                
-                Container( // date picker
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  child: CustomDatePicker(
-  onDateSelected: (date) {
-    Get.find<TodoController>().setDueDate(date);
-  },
-)
-                ),
-                
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 15),
-                  child: Obx(() {
-                    final categories = taskController.tasks.keys.toList();
-                    final items = [... categories, "Add New Category"];
+    final taskController = Get.find<TodoController>();
+  final controller = Get.find<WidgetController>();
 
-                    return CustomDropdown(
-                      items: items,
-                      value: taskController.selectedCategory.value.isEmpty
-                          ? null
-                          : taskController.selectedCategory.value,
-                      onChanged: (value) {
-                        if (value == "Add New Category") {
-                          taskController.categoryController.clear();
-
-                          print("New category clicked");
-
-                          Get.defaultDialog(
-                            title: "New Category",
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-
-                              children: [
-                                TextField(
-                                  controller: taskController.categoryController,
-                                  decoration: InputDecoration(
-                                    hintText: "Category Name"
-                                  ),
-                                ),
-
-                                SizedBox(height: 16,),
-
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Expanded(
-                                      child: CustomButton(
-                                        myText: "Add", 
-                                        onPressed: () {
-                                            final newCategory = taskController.categoryController.text.trim();
-                                            if (newCategory.isNotEmpty) {
-                                              taskController.addCategory(newCategory);
-                                              Get.back();
-                                            }
-                                        }
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          );
-                        } else if (value != null) {
-                          taskController.selectedCategory.value = value;
-                          print("Selected category: ${taskController.selectedCategory.value}");
-                        }
-                      },
-                      placeholder: "Select Category",
-                    );
-                  }),
-                ),
-                
-                Container( // radiobutton priority
-                  margin: const EdgeInsets.symmetric(vertical: 15),
-                  child: Obx(() => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CustomRadioButton(
-                        label: 'High',
-                        isSelected: taskController.selectedPriority.value == 'High',
-                        onTap: () {
-                          taskController.selectedPriority.value = 'High';
-                          print("High priority selected");
-                        },
-                      ),
-                      CustomRadioButton(
-                        label: 'Medium',
-                        isSelected: taskController.selectedPriority.value == 'Medium',
-                        onTap: () {
-                          taskController.selectedPriority.value = 'Medium';
-                          print("Medium priority selected");
-                        },
-                      ),
-                      CustomRadioButton(
-                        label: 'Low',
-                        isSelected: taskController.selectedPriority.value == 'Low',
-                        onTap: () {
-                          taskController.selectedPriority.value = 'Low';
-                          print("Low priority selected");
-                        },
-                      ),
-                    ],
-                  ),) 
-                ),
-                
-                Container( // button add & cancel
-                  margin: const EdgeInsets.only(top: 20),
-                  child: Row(
-                    children: [
-                      
-                      Expanded( // add button
-                        child: Container(
-                          margin: const EdgeInsets.only(right: 8),
-                          child: CustomButton( 
-                            myText: "ADD",
-                            onPressed: () {
-                              if (taskController.taskController.text.isEmpty || taskController.selectedCategory.value.isEmpty || taskController.selectedPriority.value.isEmpty) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text("⚠️ Please fill all fields"),
-                                    backgroundColor: const Color.fromARGB(255, 179, 24, 24),
-                                  ),
-                                );
-                                return;
-                              }
-
-                              // new task
-final controller = Get.find<TodoController>();
-TaskModel newTask = TaskModel(
-  title: controller.taskController.text,
-  priority: controller.selectedPriority.value,
-  // dueDate akan di-set otomatis di controller.addTask
-);
-
-                              // add task
-                              taskController.addTask(
-                                taskController.selectedCategory.value, 
-                                newTask
-                              );
-
-                              // clear
-                              taskController.taskController.clear();
-                              taskController.selectedCategory.value = '';
-                              taskController.selectedPriority.value = '';
-                              
-
-                              // notification
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text("✅ Task added!"),
-                                  backgroundColor: AppColors.paleGreen,
-                                ),
-                              );
-
-                              Get.toNamed(AppRoutes.dashboard,
-                              arguments: taskController.tasks.keys.toList(),);
-                            },
-                            backgroundColor: const Color(0xFFA4B67C),
-                          ),
-                        ),
-                      ),
-
-
-                      Expanded( // cancel button
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 8),
-                          child: CustomButton(
-                            myText: "CANCEL",
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            backgroundColor: AppColors.paleYellow,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+@override
+Widget build(BuildContext context) {
+  final responsiveController = Get.find<WidgetController>();
+  responsiveController.updateLayout(context);
+  
+  return Obx(() => responsiveController.isWideScreen.value 
+    ? AddTaskWide() 
+    : AddTaskMobile()
+  );
+}
 }
