@@ -3,9 +3,32 @@ import 'package:get/get.dart';
 import 'package:noted/controller/Splashscreen_controller.dart';
 import 'package:noted/components/custom_color.dart';
 
-class SplashscreenPage extends StatelessWidget {
+class SplashscreenPage extends StatefulWidget {
   SplashscreenPage({super.key});
+
+  @override
+  State<SplashscreenPage> createState() => _SplashscreenPageState();
+}
+
+class _SplashscreenPageState extends State<SplashscreenPage>
+    with TickerProviderStateMixin {
   final splashController = Get.find<SplashscreenController>();
+  late AnimationController _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: Duration(seconds: 1),
+      vsync: this,
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,27 +49,14 @@ class SplashscreenPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // App Icon/Logo
-              Container(
-                width: 120,
-                height: 120,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 15,
-                      offset: Offset(0, 5),
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    'assets/images/cat.jpg',
-                    fit: BoxFit.cover,
-                  ),
+              // App Icon/Logo (tanpa container)
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  width: 120,
+                  height: 120,
+                  fit: BoxFit.cover,
                 ),
               ),
               SizedBox(height: 30),
@@ -74,15 +84,50 @@ class SplashscreenPage extends StatelessWidget {
               ),
               SizedBox(height: 40),
               
-              // Loading Indicator
-              CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                strokeWidth: 3,
+              // Bouncing Dots Loading Indicator
+              BouncingDotsIndicator(
+                animationController: _animationController,
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class BouncingDotsIndicator extends StatelessWidget {
+  final AnimationController animationController;
+
+  const BouncingDotsIndicator({
+    Key? key,
+    required this.animationController,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(3, (index) {
+        return AnimatedBuilder(
+          animation: animationController,
+          builder: (context, child) {
+            final value = (animationController.value - (index * 0.2)).clamp(0.0, 1.0);
+            return Transform.translate(
+              offset: Offset(0, -10 * (value < 0.5 ? 2 * value : 2 * (1 - value))),
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 4),
+                width: 12,
+                height: 12,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+              ),
+            );
+          },
+        );
+      }),
     );
   }
 }
