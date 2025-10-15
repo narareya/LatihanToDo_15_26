@@ -28,8 +28,8 @@ class AddTaskMobile extends StatelessWidget {
     if (task != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         taskController.initEditTask(task!);
-    });
-}
+      });
+    }
 
     return Scaffold(
       backgroundColor: const Color(0xFFDFCAB5),
