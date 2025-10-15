@@ -127,7 +127,6 @@ class TodoController extends GetxController {
       fetchTasks();
     }
 
-
     // reset
     taskController.clear();
     selectedPriority.value = '';
@@ -135,6 +134,7 @@ class TodoController extends GetxController {
     taskToEdit = null;
   }
 
+  // mindah tasks
   Future<void> toggleTaskStatus(String category, int index, {bool fromDone = false}) async {
     final source = fromDone ? doneTasks : tasks;
     final target = fromDone ? tasks : doneTasks;
@@ -156,6 +156,7 @@ class TodoController extends GetxController {
     doneTasks.refresh();
   }
 
+  // delete
   Future<void> deleteTask(String category, int index, {bool fromDone = false}) async {
     final source = fromDone ? doneTasks : tasks;
     final taskList = source[category];
@@ -172,7 +173,7 @@ class TodoController extends GetxController {
     doneTasks.refresh();
   }
 
-
+  // prepare buat edit
   void initEditTask(TaskModel task) {
     taskToEdit = task;
     taskController.text = taskToEdit!.title ?? '';

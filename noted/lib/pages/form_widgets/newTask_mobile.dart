@@ -25,8 +25,6 @@ class AddTaskMobile extends StatelessWidget {
       task = args['task'] as TaskModel;
     }
 
-    print("received task : $task");
-
     if (task != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         taskController.initEditTask(task!);
