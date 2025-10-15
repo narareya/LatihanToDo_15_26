@@ -4,7 +4,6 @@ import 'package:noted/components/custom_card.dart';
 import 'package:noted/components/custom_color.dart';
 import 'package:noted/components/custom_text.dart';
 import 'package:noted/controller/ToDo_controller.dart';
-import 'package:noted/routes/routes.dart';
 
 class HistoryMobile extends StatelessWidget{
 const HistoryMobile({super.key});
