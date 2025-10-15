@@ -7,7 +7,7 @@ import 'package:noted/models/task_model.dart';
 class TodoController extends GetxController {
   final taskController = TextEditingController();
   final categoryController = TextEditingController();
-  var selectedDate = Rx<DateTime?>(null); // ← Pastikan DateTime
+  var selectedDate = Rx<DateTime?>(null); 
   var selectedCategory = ''.obs;
   var selectedPriority = ''.obs;
   final _dbHelper = DBHelper();
@@ -30,7 +30,7 @@ class TodoController extends GetxController {
 
     // loop
     for (var task in allTasks) {
-      final category = task.category ?? "Personal"; // default kalo null
+      final category = task.category ?? "Personal";
       
       // kalo tasksnya uda slese, masukin ke doneTasks, kalo blom masuk ke tasks
       if (task.isDone == true) {
@@ -69,7 +69,7 @@ class TodoController extends GetxController {
   // Method untuk set due date
   void setDueDate(DateTime? date) {
     selectedDate.value = date;
-    print("DEBUG: Selected date set to: $date"); // ← Debug
+    print("DEBUG: Selected date set to: $date");
   }
 
 
@@ -78,9 +78,9 @@ class TodoController extends GetxController {
     // Set due date dari selectedDate
     if (selectedDate.value != null) {
       task.dueDate = selectedDate.value;
-      print("DEBUG: Task dueDate set to: ${task.dueDate}"); // ← Debug
+      print("DEBUG: Task dueDate set to: ${task.dueDate}");
     } else {
-      print("DEBUG: No selectedDate found"); // ← Debug
+      print("DEBUG: No selectedDate found"); 
     }
 
     // insert database

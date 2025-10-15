@@ -16,11 +16,10 @@ class HomePage extends StatelessWidget {
     
     return LayoutBuilder(
       builder: (context, constraints) {
-        widgetController.updateLayout(context);
         
-        return Obx(() => widgetController.isWideScreen.value 
-          ? HomepageWide()
-          : HomepageMobile()
+        return Obx(() => widgetController.isMobile.value 
+          ? HomepageMobile()
+          : HomepageWide()
         );
       },
     );

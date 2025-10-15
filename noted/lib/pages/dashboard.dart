@@ -14,11 +14,10 @@ class DashboardPage extends StatelessWidget {
 @override
 Widget build(BuildContext context) {
   final responsiveController = Get.find<WidgetController>();
-  responsiveController.updateLayout(context);
   
-  return Obx(() => responsiveController.isWideScreen.value 
-    ? DashboardWide() 
-    : DashboardMobile()
+  return Obx(() => responsiveController.isMobile.value 
+    ? DashboardMobile()
+    : DashboardWide()
   );
 }
 }

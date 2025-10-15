@@ -11,11 +11,10 @@ class LoginPage extends StatelessWidget {
     
     return LayoutBuilder(
       builder: (context, constraints) {
-        widgetController.updateLayout(context);
         
-        return Obx(() => widgetController.isWideScreen.value 
-          ? LoginWide() 
-          : LoginMobile()
+        return Obx(() => widgetController.isMobile.value 
+          ? LoginMobile()
+          : LoginWide()
         );
       },
     );

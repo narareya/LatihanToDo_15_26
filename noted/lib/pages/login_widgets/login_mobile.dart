@@ -37,7 +37,7 @@ class LoginMobile extends StatelessWidget {
             Container(
               margin: const EdgeInsets.symmetric(vertical: 35),
               child: Image.asset(
-                'assets/images/logo.png',
+                'assets/images/cat.jpg',
                 width: 240,
                 height: 240,
                 fit: BoxFit.cover,

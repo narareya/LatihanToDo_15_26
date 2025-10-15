@@ -16,11 +16,10 @@ final authController = Get.find<AuthController>();
     
     return LayoutBuilder(
       builder: (context, constraints) {
-        widgetController.updateLayout(context);
         
-        return Obx(() => widgetController.isWideScreen.value 
-          ? ProfileWide() 
-          : ProfileMobile()
+        return Obx(() => widgetController.isMobile.value 
+          ? ProfileMobile()
+          : ProfileWide()
         );
       },
     );

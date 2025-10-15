@@ -53,7 +53,7 @@ class _SplashscreenPageState extends State<SplashscreenPage>
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
-                  'assets/images/logo.png',
+                  'assets/images/cat.jpg',
                   width: 120,
                   height: 120,
                   fit: BoxFit.cover,

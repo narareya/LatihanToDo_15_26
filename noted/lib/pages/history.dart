@@ -11,16 +11,15 @@ class HistoryPage extends StatelessWidget {
     HistoryPage({super.key});
   
     final taskController = Get.find<TodoController>();
-  final controller = Get.find<WidgetController>();
+    final controller = Get.find<WidgetController>();
 
 @override
 Widget build(BuildContext context) {
   final responsiveController = Get.find<WidgetController>();
-  responsiveController.updateLayout(context);
   
-  return Obx(() => responsiveController.isWideScreen.value 
-    ? HistoryWide() 
-    : HistoryMobile()
+  return Obx(() => responsiveController.isMobile.value 
+    ? HistoryMobile() 
+    : HistoryWide()
   );
 }
 }

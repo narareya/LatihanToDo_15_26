@@ -16,11 +16,10 @@ class AddTaskPage extends StatelessWidget {
 @override
 Widget build(BuildContext context) {
   final responsiveController = Get.find<WidgetController>();
-  responsiveController.updateLayout(context);
   
-  return Obx(() => responsiveController.isWideScreen.value 
-    ? AddTaskWide() 
-    : AddTaskMobile()
+  return Obx(() => responsiveController.isMobile.value 
+    ? AddTaskMobile()
+    : AddTaskWide()
   );
 }
 }
